@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+            
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+            
+            <button type="button" id="submitButton">Submit</button>
+        </form>
+        <div id="response" class="response"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#submitButton").click(function () {
+                const formData = $("#registrationForm").serialize();
+                $.post("process.php", formData, function (data) {
+                    $("#response").html(data);
+                    $("#registrationForm")[0].reset();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
